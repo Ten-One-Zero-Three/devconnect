@@ -1,4 +1,7 @@
 # Wireframes
+An Lam
+Emmanuel Enenta
+Azeem Ibrahim
 
 ## List of Pages
 
