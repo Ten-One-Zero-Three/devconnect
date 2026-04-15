@@ -3,6 +3,8 @@ An Lam -
 Emmanuel Enenta -
 Azeem Ibrahim
 
+“What makes DevConnect different is that we don’t just store developer knowledge — we actively help users create better questions and find better answers using AI
+
 ## List of Pages
 
 - ⭐ Feed / Home — Browse all posts
