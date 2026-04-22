@@ -5,6 +5,7 @@
 
 # Dependencies
 node_modules/
+**/.vite/
 
 # Vite build output
 client/dist/
