@@ -1,17 +1,26 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import Feed from './pages/Feed'
+import SinglePost from './pages/SinglePost'
+import NewPost from './pages/NewPost'
+import Profile from './pages/Profile'
+import Login from './pages/Login'
 import './App.css'
 
 const App = () => {
   let element = useRoutes([
-    
+    { path: '/',            element: <Feed /> },
+    { path: '/posts/:id',   element: <SinglePost /> },
+    { path: '/new',         element: <NewPost /> },
+    { path: '/profile',     element: <Profile /> },
+    { path: '/login',       element: <Login /> },
   ])
 
   return (
     <div className='app'>
-      DEV CONNECT FRONT END
+      <NavBar />
       { element }
-
     </div>
   )
 }
