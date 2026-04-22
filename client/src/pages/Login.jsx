@@ -7,6 +7,7 @@ const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -39,7 +40,8 @@ const Login = () => {
       } else {
         localStorage.setItem('token', data.token)
         localStorage.setItem('user', JSON.stringify(data.user))
-        navigate('/')
+        setSuccess('Successfully logged in!')
+        setTimeout(() => navigate('/'), 1000)
       }
     } catch (err) {
       setError('Could not connect to server')
@@ -103,6 +105,7 @@ const Login = () => {
         </label>
 
         {error && <p className="login-error">{error}</p>}
+        {success && <p className="login-success">{success}</p>}
 
         <button type="submit" className="login-submit">
           {tab === 'login' ? 'Log In' : 'Create Account'}

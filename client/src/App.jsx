@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
 import NavBar from './components/NavBar'
+import GuestRoute from './components/GuestRoute'
 import Feed from './pages/Feed'
 import SinglePost from './pages/SinglePost'
 import NewPost from './pages/NewPost'
@@ -14,7 +15,7 @@ const App = () => {
     { path: '/posts/:id',   element: <SinglePost /> },
     { path: '/new',         element: <NewPost /> },
     { path: '/profile',     element: <Profile /> },
-    { path: '/login',       element: <Login /> },
+    { path: '/login',       element: <GuestRoute><Login /></GuestRoute> },
   ])
 
   return (

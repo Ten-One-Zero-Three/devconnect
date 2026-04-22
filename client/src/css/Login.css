@@ -35,6 +35,12 @@
   margin-bottom: 0.5rem;
 }
 
+.login-success {
+  color: green;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
 .password-wrapper {
   position: relative;
   display: flex;
