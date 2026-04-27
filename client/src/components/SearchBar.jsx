@@ -3,7 +3,7 @@ import '../css/SearchBar.css'
 
 const SearchBar = ({ value, onChange, onSubmit }) => {
   return (
-    <form className="search-container" onSubmit={(e) => { e.preventDefault(); onSubmit?.() }}>
+    <form className="searchbar" onSubmit={(e) => { e.preventDefault(); onSubmit?.() }}>
       <input
         type="search"
         className="search-input"
