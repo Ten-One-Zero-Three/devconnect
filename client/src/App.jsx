@@ -8,6 +8,7 @@ import NewPost from './pages/NewPost'
 import Profile from './pages/Profile'
 import Login from './pages/Login'
 import './App.css'
+import './css/theme.css'; 
 
 const App = () => {
   let element = useRoutes([
@@ -19,11 +20,13 @@ const App = () => {
   ])
 
   return (
-    <div className='app'>
+    <div className='app-container'> {/* Use app-container */}
       <NavBar />
-      { element }
+      <main className='main-content'> {/* Wrap content in main-content */}
+        {element}
+      </main>
     </div>
-  )
-}
+  );
+};
 
 export default App

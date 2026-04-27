@@ -1,40 +1,39 @@
-import { Link, useNavigate } from 'react-router-dom'
+// client/src/components/NavBar.jsx
+import { Link, useNavigate } from 'react-router-dom';
+import '../css/NavBar.css'// We will create this file next
 
 const NavBar = () => {
-  const navigate = useNavigate()
-  const token = localStorage.getItem('token')
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   const handleLogout = async () => {
-    const confirmed = window.confirm('Would you like to log out?')
-    if (!confirmed) return
+    if (!window.confirm('Are you sure you want to log out?')) return;
 
-    await fetch('/api/auth/logout', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    navigate('/login')
-  }
+    // This is a mock logout. In a real app, you might invalidate the token on the server.
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
 
   return (
-    <nav>
-      <ul>
-        <li><strong><Link to="/">DevConnect</Link></strong></li>
-      </ul>
-      <ul>
-        <li><Link to="/">🏠 Home</Link></li>
-        <li><Link to="/new">➕ Post</Link></li>
-        <li><Link to="/profile">👤 Profile</Link></li>
-        <li>
-          {token
-            ? <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</a>
-            : <Link to="/login">Login</Link>
-          }
-        </li>
-      </ul>
-    </nav>
-  )
-}
+    <header className="navbar">
+      <div className="navbar-content">
+        <Link to="/" className="navbar-brand">
+          <strong>DevConnect</strong>
+        </Link>
+        <nav className="navbar-links">
+          <Link to="/">🏠 Home</Link>
+          <Link to="/new">➕ New Post</Link>
+          <Link to="/profile">👤 Profile</Link>
+          {token ? (
+            <a onClick={handleLogout} className="navbar-action-link">Logout</a>
+          ) : (
+            <Link to="/login" className="navbar-action-link">Login</Link>
+          )}
+        </nav>
+      </div>
+    </header>
+  );
+};
 
-export default NavBar
+export default NavBar;
