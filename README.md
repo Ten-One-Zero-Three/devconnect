@@ -34,7 +34,13 @@ Backend:
 - PostgreSQL
 
 ## Features
-
+### [Login and Register - Authentication]
+   User can register an account
+   User can login into account
+   User can logout
+   User is given JWT tokent for session log in.
+   ![Demo](./milestone4.gif)
+   
 ### [Create Post]
 
 Users can create new posts by providing a title and content to share ideas or ask questions.
