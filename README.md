@@ -39,6 +39,7 @@ Backend:
    User can login into account
    User can logout
    User is given JWT tokent for session log in.
+   ![Demo](./milestone4.gif)
    
 ### [Create Post]
 
