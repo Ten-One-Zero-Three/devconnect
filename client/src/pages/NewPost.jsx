@@ -1,32 +1,39 @@
-// client/src/pages/NewPost.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../css/NewPost.css';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { createPost } from '../lib/api'
+import '../css/NewPost.css'
 
 const NewPost = () => {
-  const [form, setForm] = useState({ title: '', body: '', tags: '' });
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [form, setForm] = useState({ title: '', body: '', tags: '' })
+  const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     if (!form.title.trim() || !form.body.trim()) {
-      setError('Title and body are required.');
-      return;
+      setError('Title and body are required.')
+      return
     }
-    // In a real app, you would send this to an API
-    console.log('Submitting new post:', {
-      ...form,
-      tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
-    });
-    setError('');
-    // Navigate to the feed or the new post's page on success
-    navigate('/');
-  };
+    setError('')
+    setSubmitting(true)
+    try {
+      const post = await createPost({
+        title: form.title.trim(),
+        content: form.body.trim(),
+        tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
+      })
+      navigate(`/posts/${post.id}`)
+    } catch (err) {
+      setError(err.message || 'Failed to create post')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   return (
     <div className="form-container">
@@ -71,14 +78,16 @@ const NewPost = () => {
         {error && <p className="form-error">{error}</p>}
 
         <div className="form-actions">
-          <button type="submit" className="btn-primary">Publish Post</button>
+          <button type="submit" className="btn-primary" disabled={submitting}>
+            {submitting ? 'Publishing...' : 'Publish Post'}
+          </button>
           <button type="button" className="btn-secondary" onClick={() => navigate(-1)}>
             Cancel
           </button>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default NewPost;
+export default NewPost

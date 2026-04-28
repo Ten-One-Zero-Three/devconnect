@@ -7,7 +7,7 @@
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-lg);
-  padding: 8px 10px;
+  padding: 6px 8px;
   transition: var(--transition);
 }
 
@@ -19,14 +19,15 @@
 .searchbar .search-input {
   flex: 1;
   min-width: 0;
-  width: 100%;
   background: transparent;
   border: none;
-  color: var(--text-primary);
-  padding: 10px 12px;
-  font-size: 1rem;
   outline: none;
-  box-sizing: border-box;
+  box-shadow: none;
+  color: var(--text-primary);
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  margin: 0;
+  height: auto;
 }
 
 .searchbar .search-input::placeholder {
@@ -34,14 +35,20 @@
 }
 
 .searchbar .search-button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
   background-color: var(--accent-primary);
   color: var(--text-on-accent);
   border: none;
   border-radius: var(--radius-md);
-  padding: 10px 20px;
-  font-weight: 700;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  margin: 0;
 }
 
 .searchbar .search-button:hover {

@@ -23,7 +23,7 @@ const NavBar = () => {
         </Link>
         <nav className="navbar-links">
           <Link to="/">🏠 Home</Link>
-          <Link to="/new">➕ New Post</Link>
+          {token && <Link to="/new">➕ New Post</Link>}
           <Link to="/profile">👤 Profile</Link>
           {token ? (
             <a onClick={handleLogout} className="navbar-action-link">Logout</a>
