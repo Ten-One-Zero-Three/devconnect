@@ -1,0 +1,139 @@
+.comments-list {
+  display: grid;
+  gap: 0;
+}
+
+.comments-empty {
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-primary);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  padding: 24px;
+  text-align: center;
+}
+
+.comment-card {
+  display: flex;
+  gap: 14px;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  align-items: flex-start;
+}
+
+.comment-avatar {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  color: var(--text-accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  min-width: 0;
+  width: 100%;
+}
+
+.comment-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.comment-time {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.comment-body {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.reply-toggle {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--text-accent);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0;
+  width: auto;
+}
+
+.reply-toggle:hover {
+  text-decoration: underline;
+}
+
+.reply-form-wrapper {
+  margin-left: 56px;
+  margin-top: 8px;
+}
+
+.reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reply-textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background: #07101a;
+  color: inherit;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 0.9rem;
+}
+
+.reply-submit {
+  align-self: flex-start;
+  background: var(--accent-primary);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: auto;
+}
+
+.reply-submit:hover {
+  background: var(--accent-hover);
+}
+
+.replies-list {
+  margin-left: 56px;
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.comment-reply .comment-card {
+  background: var(--bg-tertiary);
+  border-color: transparent;
+  padding: 12px;
+}
+
+.comment-reply .comment-avatar {
+  width: 32px;
+  height: 32px;
+  font-size: 0.8rem;
+}

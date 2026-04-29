@@ -1,0 +1,59 @@
+/* client/src/components/NavBar.css */
+.navbar {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 60px;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navbar-links a {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: var(--transition);
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-links a:hover {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.navbar-links a.navbar-action-link {
+  cursor: pointer;
+  background-color: var(--bg-tertiary);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border-bottom: none;
+}
+
+.navbar-links a.navbar-action-link:hover {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+}
