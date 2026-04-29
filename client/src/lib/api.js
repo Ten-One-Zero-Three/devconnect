@@ -45,3 +45,10 @@ export const addComment = (id, content) =>
     headers: authHeaders(),
     body: JSON.stringify({ content }),
   })
+
+export const addReply = (postId, commentId, content) =>
+  request(`/posts/${postId}/comments/${commentId}/replies`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: JSON.stringify({ content }),
+  })

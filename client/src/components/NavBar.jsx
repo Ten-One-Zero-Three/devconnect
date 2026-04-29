@@ -24,6 +24,7 @@ const NavBar = () => {
         <nav className="navbar-links">
           <Link to="/">🏠 Home</Link>
           {token && <Link to="/new">➕ New Post</Link>}
+          {token && <Link to="/my-posts">📋 My Posts</Link>}
           <Link to="/profile">👤 Profile</Link>
           {token ? (
             <a onClick={handleLogout} className="navbar-action-link">Logout</a>

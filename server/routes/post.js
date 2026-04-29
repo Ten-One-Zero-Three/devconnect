@@ -7,6 +7,7 @@ import {
   deletePost,
   toggleUpvote,
   addComment,
+  addReply,
 } from '../controllers/post.js'
 import requireAuth from '../middleware/auth.js'
 
@@ -19,5 +20,6 @@ router.put('/:id', requireAuth, updatePost)
 router.delete('/:id', requireAuth, deletePost)
 router.post('/:id/upvote', requireAuth, toggleUpvote)
 router.post('/:id/comments', requireAuth, addComment)
+router.post('/:id/comments/:commentId/replies', requireAuth, addReply)
 
 export default router

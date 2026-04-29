@@ -56,7 +56,7 @@ describe('getAllPosts', () => {
 describe('getPostById', () => {
   it('returns post with comments', async () => {
     const post = { id: 1, title: 'Test', username: 'an_lam', tags: ['react'] }
-    const comments = [{ id: 1, content: 'Nice', username: 'emma_dev' }]
+    const comments = [{ id: 1, content: 'Nice', username: 'emma_dev', parent_id: null }]
 
     pool.query
       .mockResolvedValueOnce({ rows: [post] })
@@ -66,7 +66,7 @@ describe('getPostById', () => {
     const res = mockRes()
     await getPostById(req, res)
 
-    expect(res.json).toHaveBeenCalledWith({ ...post, comments })
+    expect(res.json).toHaveBeenCalledWith({ ...post, comments: [{ ...comments[0], replies: [] }] })
   })
 
   it('returns 404 when post not found', async () => {
@@ -255,15 +255,18 @@ describe('toggleUpvote', () => {
 
 describe('addComment', () => {
   it('adds a comment', async () => {
-    const comment = { id: 1, content: 'Great post!', user_id: 1, post_id: 1 }
-    pool.query.mockResolvedValueOnce({ rows: [comment] })
+    const inserted = { id: 1, content: 'Great post!', user_id: 1, post_id: 1 }
+    const withUsername = { ...inserted, username: 'an_lam' }
+    pool.query
+      .mockResolvedValueOnce({ rows: [inserted] })
+      .mockResolvedValueOnce({ rows: [withUsername] })
 
     const req = { params: { id: '1' }, body: { content: 'Great post!' }, user: { id: 1 } }
     const res = mockRes()
     await addComment(req, res)
 
     expect(res.status).toHaveBeenCalledWith(201)
-    expect(res.json).toHaveBeenCalledWith(comment)
+    expect(res.json).toHaveBeenCalledWith({ ...withUsername, replies: [] })
   })
 
   it('returns 500 on db error', async () => {

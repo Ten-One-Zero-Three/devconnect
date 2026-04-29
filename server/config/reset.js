@@ -45,6 +45,7 @@ const setup = async () => {
         content    text NOT NULL,
         user_id    integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         post_id    integer NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+        parent_id  integer REFERENCES comments(id) ON DELETE CASCADE,
         created_at timestamp DEFAULT now()
       );
 

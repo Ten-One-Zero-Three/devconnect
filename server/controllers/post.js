@@ -50,7 +50,14 @@ export const getPostById = async (req, res) => {
       ORDER BY c.created_at ASC
     `, [id])
 
-    res.json({ ...postResult.rows[0], comments: commentsResult.rows })
+    const flat = commentsResult.rows
+    const topLevel = flat.filter(c => !c.parent_id).map(c => ({ ...c, replies: [] }))
+    const byId = Object.fromEntries(topLevel.map(c => [c.id, c]))
+    flat.filter(c => c.parent_id).forEach(r => {
+      if (byId[r.parent_id]) byId[r.parent_id].replies.push(r)
+    })
+
+    res.json({ ...postResult.rows[0], comments: topLevel })
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch post' })
   }
@@ -152,8 +159,36 @@ export const addComment = async (req, res) => {
       'INSERT INTO comments (content, user_id, post_id) VALUES ($1, $2, $3) RETURNING *',
       [content, userId, id]
     )
-    res.status(201).json(result.rows[0])
+    const comment = await pool.query(
+      'SELECT c.*, u.username FROM comments c JOIN users u ON u.id = c.user_id WHERE c.id = $1',
+      [result.rows[0].id]
+    )
+    res.status(201).json({ ...comment.rows[0], replies: [] })
   } catch (error) {
+    console.error('addComment error:', error.message)
     res.status(500).json({ error: 'Failed to add comment' })
+  }
+}
+
+export const addReply = async (req, res) => {
+  const { id, commentId } = req.params
+  const { content } = req.body
+  const userId = req.user.id
+
+  try {
+    const parent = await pool.query('SELECT id FROM comments WHERE id = $1 AND post_id = $2', [commentId, id])
+    if (parent.rows.length === 0) return res.status(404).json({ error: 'Comment not found' })
+
+    const result = await pool.query(
+      'INSERT INTO comments (content, user_id, post_id, parent_id) VALUES ($1, $2, $3, $4) RETURNING *',
+      [content, userId, id, commentId]
+    )
+    const reply = await pool.query(
+      'SELECT c.*, u.username FROM comments c JOIN users u ON u.id = c.user_id WHERE c.id = $1',
+      [result.rows[0].id]
+    )
+    res.status(201).json(reply.rows[0])
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add reply' })
   }
 }

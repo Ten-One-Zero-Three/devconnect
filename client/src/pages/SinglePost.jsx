@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import CommentList from '../components/CommentList'
-import { getPost, toggleUpvote, addComment } from '../lib/api'
+import { getPost, toggleUpvote, addComment, addReply } from '../lib/api'
 import '../css/SinglePost.css'
 
 const SinglePost = () => {
@@ -43,6 +43,16 @@ const SinglePost = () => {
     } catch {} finally {
       setSubmitting(false)
     }
+  }
+
+  const handleReply = async (commentId, replyText) => {
+    const reply = await addReply(id, commentId, replyText)
+    setPost(prev => ({
+      ...prev,
+      comments: prev.comments.map(c =>
+        c.id === commentId ? { ...c, replies: [...(c.replies || []), reply] } : c
+      ),
+    }))
   }
 
   if (loading) return <div className="not-found-container">Loading...</div>
@@ -113,7 +123,7 @@ const SinglePost = () => {
         <h3 className="comments-section-title">
           {(post.comments || []).length} {(post.comments || []).length === 1 ? 'Comment' : 'Comments'}
         </h3>
-        <CommentList comments={post.comments || []} />
+        <CommentList comments={post.comments || []} token={token} onReply={handleReply} />
       </section>
     </div>
   )
