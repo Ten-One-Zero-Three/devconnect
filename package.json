@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "jsonwebtoken": "^9.0.3"
-  },
-  "devDependencies": {
-    "vitest": "^4.1.5"
-  }
-}
