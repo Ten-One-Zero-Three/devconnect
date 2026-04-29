@@ -71,12 +71,12 @@ Users can remove posts they no longer want to keep.
 
 ### [Comment on Posts and comment on comment] ✅ 
 Users can engage with others by adding comments to posts.
-![Demo](./comments.gif)
+![Demo](./global/comments.gif)
 
 ### [Upvote Posts] ✅ 
 Users can upvote posts to highlight useful or popular content.
 upvote.gif
-![Demo](./upvote.gif)
+![Demo](./global/upvote.gif)
 ### [Filter Posts by Tags]
 Users can filter posts based on tags to find relevant topics quickly.
 
